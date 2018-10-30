@@ -4,5 +4,6 @@
         "GuardRex.status-bar-tasks",
         "streetsidesoftware.code-spell-checker",
         "eamodio.gitlens",
+        "EditorConfig.EditorConfig",
     ]
 }

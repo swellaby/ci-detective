@@ -94,16 +94,16 @@ tasks:
     desc: Runs unit tests.
     deps: [create-report-dirs]
     cmds:
-      - gotestsum --format standard-verbose --junitfile {{.UNIT_TEST_RESULTS_JUNIT_FILEPATH}} --jsonfile {{.UNIT_TEST_RESULTS_JSON_FILEPATH}} -- -coverprofile={{.UNIT_TEST_COVERAGE_OUT_FILEPATH}} ./...
+      - gotestsum --format standard-verbose --junitfile {{.UNIT_TEST_RESULTS_JUNIT_FILEPATH}} --jsonfile {{.UNIT_TEST_RESULTS_JSON_FILEPATH}} -- -coverprofile={{.UNIT_TEST_COVERAGE_OUT_FILEPATH}} ./internal/cli ./cidetective
     silent: true
 
   coverage:
     desc: Runs unit tests and generates code coverage reports.
     deps: [test]
     cmds:
-      - gocov convert {{.COVOUT_FILE}} > {{.GOCOV_JSON_FILE}}
-      - gocov-xml < {{.GOCOV_JSON_FILE}} > {{.COBERTURA_XML_FILE}}
-      - gocov-html {{.GOCOV_JSON_FILE}} > {{.GOCOV_HTML_FILE}}
+      - gocov convert {{.UNIT_TEST_COVERAGE_OUT_FILEPATH}} > {{.UNIT_TEST_COVERAGE_JSON_FILEPATH}}
+      - gocov-xml < {{.UNIT_TEST_COVERAGE_JSON_FILEPATH}} > {{.UNIT_TEST_COVERAGE_COBERTURA_XML_FILEPATH}}
+      - gocov-html {{.UNIT_TEST_COVERAGE_JSON_FILEPATH}} > {{.UNIT_TEST_COVERAGE_HTML_FILEPATH}}
     silent: true
 
   open-cov:
