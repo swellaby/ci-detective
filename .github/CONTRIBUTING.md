@@ -14,7 +14,7 @@ Clone the repo, change into the directory where you cloned the repo, and then ru
 ```sh     
 git clone https://github.com/swellaby/ci-detective.git
 cd ci-detective 
-go run ./scripts/setup.go
+go run ./scripts/dev_setup.go
 ```
 
 ### Testing
