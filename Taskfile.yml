@@ -94,7 +94,7 @@ tasks:
     desc: Runs unit tests.
     deps: [create-report-dirs]
     cmds:
-      - gotestsum --format standard-verbose --junitfile {{.UNIT_TEST_RESULTS_JUNIT_FILEPATH}} --jsonfile {{.UNIT_TEST_RESULTS_JSON_FILEPATH}} -- -coverprofile={{.UNIT_TEST_COVERAGE_OUT_FILEPATH}} ./internal/cli ./cidetective
+      - gotestsum --format standard-verbose --junitfile {{.UNIT_TEST_RESULTS_JUNIT_FILEPATH}} --jsonfile {{.UNIT_TEST_RESULTS_JSON_FILEPATH}} -- -coverprofile={{.UNIT_TEST_COVERAGE_OUT_FILEPATH}} ./cidetective
     silent: true
 
   coverage:
@@ -141,5 +141,6 @@ tasks:
   check-gofmt:
     desc: Checks that files are Go formatted
     cmds:
+      - echo "Running gofmt check..."
       - 'if [ "$(gofmt -l .)" = "" ]; then echo "All files are Go formatted!"; else echo "Some files are not Go formatted" && exit 1; fi'
     silent: true
