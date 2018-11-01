@@ -23,7 +23,7 @@
       },
       {
           "label": "clean",
-          "command": "task coverage",
+          "command": "task clean",
           "type": "shell"
       }
   ]
