@@ -2,7 +2,8 @@
     "files.exclude": {
         "**/*.exe": true,
         ".coverage": true,
-        ".testresults": true
+        ".testresults": true,
+        "ci-detective": true
     },
     "cSpell.enabled": true,
     "go.autocompleteUnimportedPackages": false,

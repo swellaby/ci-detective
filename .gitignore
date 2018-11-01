@@ -2,3 +2,4 @@
 .testresults/
 **/*.exe
 ./ci-detective
+ci-detective
