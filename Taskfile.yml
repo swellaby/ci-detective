@@ -30,12 +30,18 @@ vars:
   UNIT_TEST_COVERAGE_COBERTURA_XML_FILEPATH: '{{.UNIT_TEST_COVERAGE_DIR}}/{{.COBERTURA_XML_FILENAME}}'
 
   # The root directory where the unit test result reports will be placed
-  # UNIT_TEST_RESULTS_DIR: '{{cat .TESTRESULTS_ROOT_DIR "/unit" | nospace | fromSlash}}'
   UNIT_TEST_RESULTS_DIR: '{{.TESTRESULTS_ROOT_DIR}}/unit'
 
   # The full file paths to the various unit test result report files
   UNIT_TEST_RESULTS_JUNIT_FILEPATH: '{{.UNIT_TEST_RESULTS_DIR}}/{{.RESULTS_JUNIT_FILENAME}}'
   UNIT_TEST_RESULTS_JSON_FILEPATH: '{{.UNIT_TEST_RESULTS_DIR}}/{{.RESULTS_JSON_FILENAME}}'
+
+  # The root directory where the functional test result reports will be placed
+  FUNC_TEST_RESULTS_DIR: '{{.TESTRESULTS_ROOT_DIR}}/functional'
+
+  # The full file paths to the various functional test result report files
+  FUNC_TEST_RESULTS_JUNIT_FILEPATH: '{{.FUNC_TEST_RESULTS_DIR}}/{{.RESULTS_JUNIT_FILENAME}}'
+  FUNC_TEST_RESULTS_JSON_FILEPATH: '{{.FUNC_TEST_RESULTS_DIR}}/{{.RESULTS_JSON_FILENAME}}'
 
 tasks:
   default:
@@ -79,7 +85,7 @@ tasks:
   create-report-dirs:
     desc: Creates the directories where generated reports are written.
     cmds:
-      - '{{if eq OS "windows"}}cmd.exe /C "mkdir{{else}}mkdir -p{{end}} {{fromSlash .UNIT_TEST_RESULTS_DIR}} {{fromSlash .UNIT_TEST_COVERAGE_DIR}}{{if eq OS "windows"}} 2>nul"{{end}}'
+      - '{{if eq OS "windows"}}cmd.exe /C "mkdir{{else}}mkdir -p{{end}} {{fromSlash .UNIT_TEST_RESULTS_DIR}} {{fromSlash .UNIT_TEST_COVERAGE_DIR}} {{fromSlash .FUNC_TEST_RESULTS_DIR}}{{if eq OS "windows"}} 2>nul"{{end}}'
     silent: true
     ignore_error: true
 
@@ -95,6 +101,13 @@ tasks:
     deps: [create-report-dirs]
     cmds:
       - gotestsum --format standard-verbose --junitfile {{.UNIT_TEST_RESULTS_JUNIT_FILEPATH}} --jsonfile {{.UNIT_TEST_RESULTS_JSON_FILEPATH}} -- -coverprofile={{.UNIT_TEST_COVERAGE_OUT_FILEPATH}} ./cidetective
+    silent: true
+
+  test-func:
+    desc: Runs functional tests.
+    deps: [create-report-dirs]
+    cmds:
+      - gotestsum --format standard-verbose --junitfile {{.FUNC_TEST_RESULTS_JUNIT_FILEPATH}} --jsonfile {{.FUNC_TEST_RESULTS_JSON_FILEPATH}} -- ./test/functional
     silent: true
 
   coverage:
