@@ -13,11 +13,11 @@ func init() {
 	}
 }
 
-func TestLibShouldExitWithZeroWhenEnvVarIsSet(t *testing.T) {
+func TestLibShouldReturnTrueWhenEnvVarIsSet(t *testing.T) {
 	for _, envVar := range expCIEngineEnvVars {
 		os.Setenv(envVar, "")
-		defer os.Unsetenv(envVar)
 		assert.True(t, cidetective.IsCI())
+		os.Unsetenv(envVar)
 	}
 }
 
