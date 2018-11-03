@@ -37,6 +37,7 @@ Outside contributors should fork the repository, make changes in the fork, and t
 
 [Back to Top][top]
 
+[create-issue-url]: https://github.com/swellaby/captain-githook/issues/new
 [create-bug-url]: https://github.com/swellaby/captain-githook/issues/new?template=BUG_TEMPLATE.md&labels=bug&title=Bug:%20
 [create-question-url]: https://github.com/swellaby/captain-githook/issues/new?template=QUESTION_TEMPLATE.md&labels=question&title=Q:%20
 [create-enhancement-url]: https://github.com/swellaby/captain-githook/issues/new?template=ENHANCEMENT_TEMPLATE.md&labels=enhancement
