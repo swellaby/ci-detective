@@ -46,14 +46,13 @@ var expCIEngineEnvVars = [...]string{
 func buildCommandWithEnv(envVar string) *exec.Cmd {
 	var runnerArgs []string
 	runner := ""
-	ciDetectiveCmdSuffix := " && ci-detective"
 	if runtime.GOOS == "windows" {
 		runner = "cmd.exe"
-		script := "set " + envVar + "=\"\"" + ciDetectiveCmdSuffix
+		script := "set " + envVar + "=\"\" && ci-detective"
 		runnerArgs = []string{"/V", "/C", script}
 	} else {
 		runner = "sh"
-		script := "env " + envVar + "=\"\"" + ciDetectiveCmdSuffix
+		script := "env " + envVar + "=\"\" ci-detective"
 		runnerArgs = []string{"-c", script}
 	}
 	return exec.Command(runner, runnerArgs...)
