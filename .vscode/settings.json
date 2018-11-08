@@ -3,7 +3,8 @@
         "**/*.exe": true,
         ".coverage": true,
         ".testresults": true,
-        "ci-detective": true
+        "ci-detective": true,
+        ".dist": true
     },
     "cSpell.enabled": true,
     "go.autocompleteUnimportedPackages": false,
