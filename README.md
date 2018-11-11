@@ -1,6 +1,9 @@
 # ci-detective
 Simple utility to detect whether you are running in a CI server/environment
 
+[![Latest Release][github-release-badge]][github-release-url]
+[![GoDoc][godoc-badge]][godoc-url]
+
 [![Linux CI Badge][linux-ci-badge]][linux-ci-url]
 [![Mac CI Badge][mac-ci-badge]][mac-ci-url]
 [![Windows CI Badge][windows-ci-badge]][windows-ci-url]  
@@ -15,7 +18,7 @@ Simple utility to detect whether you are running in a CI server/environment
 ## Installation
 `ci-detective` is available as both an executable/cli and a package/api.
 
-Binary releases for the CLI coming soon, but for now just use `go get`: 
+Grab a [binary release][github-release-url] or use `go get`: 
 
 ```sh
 go get -u github.com/swellaby/ci-detective
@@ -63,9 +66,12 @@ func main() {
 ### Generator
 Initially created by this [swell generator][parent-generator-url]!
 
-
+[github-release-badge]: https://img.shields.io/github/release/swellaby/ci-detective.svg
+[github-release-url]: https://github.com/swellaby/ci-detective/releases/latest
 [go-report-card-badge]: https://goreportcard.com/badge/github.com/swellaby/ci-detective
 [go-report-card-url]: https://goreportcard.com/report/github.com/swellaby/ci-detective
+[godoc-badge]: https://godoc.org/github.com/swellaby/ci-detective/cidetective?status.svg
+[godoc-url]: https://godoc.org/github.com/swellaby/ci-detective/cidetective
 [linux-ci-badge]: https://dev.azure.com/swellaby/OpenSource/_apis/build/status/captain-githook/captain-githook-PR-Linux?branchName=master&label=linux%20build
 [linux-ci-url]: https://dev.azure.com/swellaby/OpenSource/_build/latest?definitionId=25
 [mac-ci-badge]: https://dev.azure.com/swellaby/OpenSource/_apis/build/status/captain-githook/captain-githook-PR-Mac?branchName=master&label=mac%20build
