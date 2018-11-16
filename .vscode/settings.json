@@ -13,6 +13,23 @@
         "**/.git/**",
         ".vscode",
     ],
+    "cSpell.enabledLanguageIds": [
+        "go",
+        "json",
+        "markdown",
+        "plaintext",
+        "text",
+        "yaml",
+        "yml"
+    ],
+    "cSpell.dictionaries": [
+      "companies",
+      "en_us",
+      "filetypes",
+      "golang",
+      "misc",
+      "softwareTerms"
+    ],
     "go.autocompleteUnimportedPackages": false,
     "go.vetOnSave": "workspace",
     "go.testOnSave": false,

@@ -3,6 +3,7 @@ Simple utility to detect whether you are running in a CI server/environment
 
 [![Latest Release][github-release-badge]][github-release-url]
 [![GoDoc][godoc-badge]][godoc-url]
+[![License Badge][license-badge]][license-url]  
 
 [![Linux CI Badge][linux-ci-badge]][linux-ci-url]
 [![Mac CI Badge][mac-ci-badge]][mac-ci-url]
@@ -72,6 +73,8 @@ Initially created by this [swell generator][parent-generator-url]!
 [go-report-card-url]: https://goreportcard.com/report/github.com/swellaby/ci-detective
 [godoc-badge]: https://godoc.org/github.com/swellaby/ci-detective/cidetective?status.svg
 [godoc-url]: https://godoc.org/github.com/swellaby/ci-detective/cidetective
+[license-url]: ./LICENSE
+[license-badge]: https://img.shields.io/github/license/swellaby/ci-detective.svg
 [linux-ci-badge]: https://dev.azure.com/swellaby/OpenSource/_apis/build/status/captain-githook/captain-githook-PR-Linux?branchName=master&label=linux%20build
 [linux-ci-url]: https://dev.azure.com/swellaby/OpenSource/_build/latest?definitionId=25
 [mac-ci-badge]: https://dev.azure.com/swellaby/OpenSource/_apis/build/status/captain-githook/captain-githook-PR-Mac?branchName=master&label=mac%20build
