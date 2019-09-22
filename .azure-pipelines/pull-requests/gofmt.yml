@@ -15,7 +15,7 @@ steps:
 - script: |
     export GOPATH=$(go env GOPATH)
     PATH=$PATH:$GOPATH/bin
-    go run scripts/setup.go
+    go run scripts/dev_setup.go
   displayName: 'Install dependencies'
 
 - script: |
