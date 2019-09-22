@@ -15,7 +15,9 @@ steps:
 - script: |
     export GOPATH=$(go env GOPATH)
     PATH=$PATH:$GOPATH/bin
-    go run scripts/dev_setup.go
+    #go run scripts/dev_setup.go
+    curl -sL https://taskfile.dev/install.sh | sh
+    task setup
   displayName: 'Install dependencies'
 
 - script: |
