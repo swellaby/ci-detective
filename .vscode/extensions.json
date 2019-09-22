@@ -1,9 +1,7 @@
 {
     "recommendations": [
-        "ms-vscode.Go",
-        "GuardRex.status-bar-tasks",
-        "streetsidesoftware.code-spell-checker",
-        "eamodio.gitlens",
-        "EditorConfig.EditorConfig",
-    ]
-}
+      "ms-vscode.Go",
+      "swellaby.common-pack",
+      "ms-azure-devops.azure-pipelines"
+    ],
+  }
