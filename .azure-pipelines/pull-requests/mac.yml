@@ -8,7 +8,7 @@ pool:
   vmImage: 'macos-10.14'
 
 variables:
-- group: captain-githook
+- group: ci-detective
 - name: environment
   value: Mac
 

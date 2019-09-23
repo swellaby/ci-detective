@@ -8,7 +8,7 @@ pool:
   vmImage: 'vs2017-win2016'
 
 variables:
-- group: captain-githook
+- group: ci-detective
 - name: environment
   value: Windows
 
