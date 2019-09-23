@@ -13,10 +13,10 @@ variables:
   value: Windows
 
 steps:
-- task: GoTool@0
-  displayName: 'Use Go 1.12'
-  inputs:
-    version: 1.12
+# - task: GoTool@0
+#   displayName: 'Use Go 1.12'
+#   inputs:
+#     version: 1.12
 
 - powershell: |
    $env:GOBIN = "$(go env GOPATH)\bin"
