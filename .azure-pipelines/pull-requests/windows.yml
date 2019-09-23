@@ -13,19 +13,18 @@ variables:
   value: Windows
 
 steps:
-# - task: GoTool@0
-#   displayName: 'Use Go 1.12'
-#   inputs:
-#     version: 1.12
+- task: GoTool@0
+  displayName: 'Use Go 1.12'
+  inputs:
+    version: 1.12
 
 - powershell: |
    $env:GOBIN = "$(go env GOPATH)\bin"
    $env:PATH += ";$($env:GOBIN);"
    $url = "https://github.com/go-task/task/releases/download/v2.7.0/task_windows_amd64.zip"
-   $outFile = "task.zip"
+   $outFile = "$env:temp/task.zip"
    Invoke-WebRequest -URI $url -OutFile $outFile
    Expand-Archive $outFile -DestinationPath $env:GOBIN -Force
-   # go run ./scripts/dev_setup.go
    task setup
   displayName: 'Install dependencies'
 
