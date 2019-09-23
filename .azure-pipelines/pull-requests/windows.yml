@@ -24,7 +24,7 @@ steps:
    $url = "https://github.com/go-task/task/releases/download/v2.7.0/task_windows_amd64.zip"
    $outFile = "task.zip"
    Invoke-WebRequest -URI $url -OutFile $outFile
-   Expand-Archive -DestinationPath $env:GOBIN -Force
+   Expand-Archive $outFile -DestinationPath $env:GOBIN -Force
    # go run ./scripts/dev_setup.go
    task setup
   displayName: 'Install dependencies'
