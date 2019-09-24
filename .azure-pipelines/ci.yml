@@ -1,0 +1,150 @@
+trigger:
+- master
+
+pr: none
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+variables:
+- group: ci-detective
+- group: 'Build Tools Skip Tokens'
+- name: environment
+  value: CI
+- name: goreleaserDistDirectory
+  value: $(Build.SourcesDirectory)/.dist
+- name: darwinBinaryDirectory
+  value: $(goreleaserDistDirectory)/darwin_$(goArch)
+- name: goArch
+  value: amd64
+- name: licenseFileName
+  value: LICENSE
+- name: linuxBinaryDirectory
+  value: $(goreleaserDistDirectory)/linux_$(goArch)
+- name: readmeFileName
+  value: README.md
+- name: repoArtifactPath
+  value: $(Build.ArtifactStagingDirectory)/$(repoArtifact).tar.gz
+- name: windowsBinaryDirectory
+  value: $(goreleaserDistDirectory)/windows_$(goArch)
+
+steps:
+- task: GoTool@0
+  displayName: 'Use Go 1.12'
+  inputs:
+    version: 1.12
+
+- script: |
+    export GOPATH=$(go env GOPATH)
+    PATH=$PATH:$GOPATH/bin
+    curl -sL https://taskfile.dev/install.sh | sh -s -- -b $GOPATH/bin
+    task setup
+    export PROJECT_VERSION=$(task print-version)
+    echo "##vso[task.setvariable variable=projectVersion]$PROJECT_VERSION"
+  displayName: 'Install dependencies'
+
+- script: |
+    export GOPATH=$(go env GOPATH)
+    PATH=$PATH:$GOPATH/bin
+    git checkout master
+    git config user.name $(githubUser)
+    git config user.email $(githubEmail)
+    export PROJECT_VERSION=$(task bump-version)
+    gofmt -w ./cidetective/version.go
+    echo "##vso[task.setvariable variable=projectVersion]$PROJECT_VERSION"
+    git add ./cidetective/version.go
+    git commit -n -m "chore: bumped to version $PROJECT_VERSION from release pipeline $(succinctAllSkipTokens)"
+  displayName: 'Bump version'
+
+- script: |
+    export GOPATH=$(go env GOPATH)
+    PATH=$PATH:$GOPATH/bin
+    task ci
+  displayName: 'Run CI script'
+
+- script: |
+    export GOPATH=$(go env GOPATH)
+    export GOBIN=$GOPATH/bin
+    PATH=$PATH:$GOBIN
+    cd $(Build.StagingDirectory)
+    curl -L https://github.com/goreleaser/goreleaser/releases/download/v0.93.0/goreleaser_Linux_x86_64.tar.gz -o goreleaser.tar.gz
+    tar -xzf goreleaser.tar.gz
+    chmod +rx ./goreleaser
+    cp ./goreleaser $GOBIN/goreleaser
+    cd $(Build.SourcesDirectory)
+    goreleaser release --skip-publish --snapshot --rm-dist
+  displayName: 'Cross compile binaries'
+
+- task: SonarSource.sonarcloud.14d9cde6-c1da-4d55-aa01-2965cd301255.SonarCloudPrepare@1
+  displayName: 'Prepare analysis on SonarCloud'
+  inputs:
+    SonarCloud: 'SonarCloud Swellaby'
+    organization: swellaby
+    scannerMode: CLI
+    extraProperties: |
+     sonar.projectVersion=$(projectVersion)
+     sonar.userHome=/home/vsts/.cache/.sonar
+
+- task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
+  displayName: 'Run Code Analysis'
+
+- task: SonarSource.sonarcloud.38b27399-a642-40af-bb7d-9971f69712e8.SonarCloudPublish@1
+  displayName: 'Publish Quality Gate Result'
+
+- task: PublishTestResults@2
+  displayName: 'Publish unit test results'
+  inputs:
+    testResultsFiles: '$(junitXmlResultsFileName)'
+    searchFolder: '$(testResultsDirPath)'
+    testRunTitle: '$($(testResultsTitle))'
+  condition: succeededOrFailed()
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage results'
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(fullCoberturaResultsFilePath)'
+    reportDirectory: '$(covResultsDirPath)'
+  condition: succeededOrFailed()
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Linux binary'
+  inputs:
+    targetPath: '$(linuxBinaryDirectory)'
+    artifact: '$(linuxArtifact)'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Darwin binary'
+  inputs:
+    targetPath: '$(darwinBinaryDirectory)'
+    artifact: '$(darwinArtifact)'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Windows binary'
+  inputs:
+    targetPath: '$(windowsBinaryDirectory)'
+    artifact: '$(windowsArtifact)'
+
+- task: ArchiveFiles@2
+  displayName: 'Archive repo'
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
+    includeRootFolder: false
+    archiveType: tar
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(repoArtifact).tar.gz'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish repo artifact'
+  inputs:
+    PathtoPublish: '$(repoArtifactPath)'
+    ArtifactName: '$(repoArtifact)'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish dist artifact'
+  inputs:
+    targetPath: '$(goreleaserDistDirectory)'
+    artifact: '$(bundlesArtifactName)'
+
+- script: |
+    git push https://$(githubPat)@github.com/swellaby/ci-detective.git
+  displayName: 'Check-in bumped version files'
