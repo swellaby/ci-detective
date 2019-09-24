@@ -9,6 +9,7 @@ pool:
 variables:
 - group: ci-detective
 - group: 'Build Tools Skip Tokens'
+- group: swellbot-github
 - name: environment
   value: CI
 - name: goreleaserDistDirectory
