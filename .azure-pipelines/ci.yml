@@ -55,6 +55,7 @@ steps:
     echo "##vso[task.setvariable variable=projectVersion]$PROJECT_VERSION"
     git add ./cidetective/version.go
     git commit -n -m "chore: bumped to version $PROJECT_VERSION from release pipeline $(succinctAllSkipTokens)"
+    git tag v$PROJECT_VERSION
   displayName: 'Bump version'
 
 - script: |
@@ -147,6 +148,5 @@ steps:
     artifact: '$(bundlesArtifactName)'
 
 - script: |
-    git tag v$(projectVersion)
     git push https://$(githubPat)@github.com/swellaby/ci-detective.git
   displayName: 'Check-in bumped version files'
