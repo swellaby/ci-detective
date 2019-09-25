@@ -147,5 +147,6 @@ steps:
     artifact: '$(bundlesArtifactName)'
 
 - script: |
+    git tag v$(projectVersion)
     git push https://$(githubPat)@github.com/swellaby/ci-detective.git
   displayName: 'Check-in bumped version files'
