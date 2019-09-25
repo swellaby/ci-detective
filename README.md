@@ -67,24 +67,24 @@ func main() {
 ### Generator
 Initially created by this [swell generator][parent-generator-url]!
 
-[github-release-badge]: https://img.shields.io/github/release/swellaby/ci-detective.svg
+[github-release-badge]: https://img.shields.io/github/release/swellaby/ci-detective?style=flat-square
 [github-release-url]: https://github.com/swellaby/ci-detective/releases/latest
-[go-report-card-badge]: https://goreportcard.com/badge/github.com/swellaby/ci-detective
+[go-report-card-badge]: https://goreportcard.com/badge/github.com/swellaby/ci-detective?style=flat-square
 [go-report-card-url]: https://goreportcard.com/report/github.com/swellaby/ci-detective
-[godoc-badge]: https://godoc.org/github.com/swellaby/ci-detective/cidetective?status.svg
+[godoc-badge]: https://img.shields.io/badge/godoc-reference-blue?style=flat-square
 [godoc-url]: https://godoc.org/github.com/swellaby/ci-detective/cidetective
 [license-url]: ./LICENSE
-[license-badge]: https://img.shields.io/github/license/swellaby/ci-detective.svg
-[linux-ci-badge]: https://dev.azure.com/swellaby/OpenSource/_apis/build/status/captain-githook/captain-githook-PR-Linux?branchName=master&label=linux%20build
-[linux-ci-url]: https://dev.azure.com/swellaby/OpenSource/_build/latest?definitionId=25
-[mac-ci-badge]: https://dev.azure.com/swellaby/OpenSource/_apis/build/status/captain-githook/captain-githook-PR-Mac?branchName=master&label=mac%20build
-[mac-ci-url]: https://dev.azure.com/swellaby/OpenSource/_build/latest?definitionId=26
-[windows-ci-badge]: https://dev.azure.com/swellaby/OpenSource/_apis/build/status/captain-githook/captain-githook-PR-Windows?branchName=master&label=windows%20build
-[windows-ci-url]: https://dev.azure.com/swellaby/OpenSource/_build/latest?definitionId=24
-[codecov-badge]: https://img.shields.io/codecov/c/github/swellaby/ci-detective.svg
+[license-badge]: https://img.shields.io/github/license/swellaby/ci-detective.svg?style=flat-square&color=blue
+[linux-ci-badge]: https://img.shields.io/azure-devops/build/swellaby/opensource/134/master?style=flat-square&label=linux%20build
+[linux-ci-url]: https://dev.azure.com/swellaby/OpenSource/_build/latest?definitionId=134
+[mac-ci-badge]: https://img.shields.io/azure-devops/build/swellaby/opensource/131/master?style=flat-square&label=mac%20build
+[mac-ci-url]: https://dev.azure.com/swellaby/OpenSource/_build/latest?definitionId=131
+[windows-ci-badge]: https://img.shields.io/azure-devops/build/swellaby/opensource/133/master?style=flat-square&label=windows%20build
+[windows-ci-url]: https://dev.azure.com/swellaby/OpenSource/_build/latest?definitionId=133
+[codecov-badge]: https://img.shields.io/codecov/c/github/swellaby/ci-detective.svg?style=flat-square
 [codecov-url]: https://codecov.io/gh/swellaby/ci-detective
-[tests-badge]: https://img.shields.io/appveyor/tests/swellaby/ci-detective.svg?label=unit%20tests
-[sonar-quality-gate-badge]: https://sonarcloud.io/api/project_badges/measure?project=swellaby%3Aci-detective&metric=alert_status
+[tests-badge]: https://img.shields.io/azure-devops/tests/swellaby/opensource/134?style=flat-square
+[sonar-quality-gate-badge]: https://img.shields.io/sonar/quality_gate/swellaby:ci-detective?server=https%3A%2F%2Fsonarcloud.io&style=flat-square
 [sonar-url]: https://sonarcloud.io/dashboard?id=swellaby%3Aci-detective
 [sonar-tests-url]: https://sonarcloud.io/component_measures?id=swellaby%3Aci-detective&metric=tests
 [parent-generator-url]: https://github.com/swellaby/generator-lets-go
