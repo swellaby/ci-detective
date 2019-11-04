@@ -6,6 +6,13 @@ pr:
 pool:
   vmImage: 'Ubuntu-16.04'
 
+resources:
+  repositories:
+  - repository: templates
+    type: github
+    name: swellaby/azure-pipelines-templates
+    endpoint: swellaby
+
 variables:
 - group: ci-detective
 - name: environment
