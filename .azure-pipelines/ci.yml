@@ -6,6 +6,13 @@ pr: none
 pool:
   vmImage: 'Ubuntu-16.04'
 
+resources:
+  repositories:
+  - repository: templates
+    type: github
+    name: swellaby/azure-pipelines-templates
+    endpoint: swellaby
+
 variables:
 - group: ci-detective
 - group: 'Build Tools Skip Tokens'
@@ -77,21 +84,9 @@ steps:
     goreleaser release --skip-publish --snapshot --rm-dist
   displayName: 'Cross compile binaries'
 
-- task: SonarSource.sonarcloud.14d9cde6-c1da-4d55-aa01-2965cd301255.SonarCloudPrepare@1
-  displayName: 'Prepare analysis on SonarCloud'
-  inputs:
-    SonarCloud: 'SonarCloud Swellaby'
-    organization: swellaby
-    scannerMode: CLI
-    extraProperties: |
-     sonar.projectVersion=$(projectVersion)
-     sonar.userHome=/home/vsts/.cache/.sonar
-
-- task: SonarSource.sonarcloud.ce096e50-6155-4de8-8800-4221aaeed4a1.SonarCloudAnalyze@1
-  displayName: 'Run Code Analysis'
-
-- task: SonarSource.sonarcloud.38b27399-a642-40af-bb7d-9971f69712e8.SonarCloudPublish@1
-  displayName: 'Publish Quality Gate Result'
+- template: templates/yml/any/sonar/run-sonar-cloud-cli-analysis.yml@templates
+  parameters:
+    projectVersion: $(projectVersion)
 
 - task: PublishTestResults@2
   displayName: 'Publish unit test results'
