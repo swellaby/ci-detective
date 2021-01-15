@@ -1,4 +1,4 @@
 package cidetective
 
 // Version defines the current version of the package
-const Version = "1.0.20"
+const Version = "1.0.21"
