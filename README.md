@@ -67,6 +67,10 @@ func main() {
 ### Generator
 Initially created by this [swell generator][parent-generator-url]!
 
+### Supported CIs
+
+- [Woodpecker CI][woodpecker-ci]
+
 [github-release-badge]: https://img.shields.io/github/release/swellaby/ci-detective?style=flat-square
 [github-release-url]: https://github.com/swellaby/ci-detective/releases/latest
 [go-report-card-badge]: https://goreportcard.com/badge/github.com/swellaby/ci-detective?style=flat-square
@@ -88,3 +92,4 @@ Initially created by this [swell generator][parent-generator-url]!
 [sonar-url]: https://sonarcloud.io/dashboard?id=swellaby%3Aci-detective
 [sonar-tests-url]: https://sonarcloud.io/component_measures?id=swellaby%3Aci-detective&metric=tests
 [parent-generator-url]: https://github.com/swellaby/generator-lets-go
+[woodpecker-ci]: https://woodpecker-ci.org
